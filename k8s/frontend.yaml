@@ -16,8 +16,19 @@ spec:
       containers:
       - name: frontend
         image: acrmicroapp.azurecr.io/frontend:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
+        env:
+        - name: BACKEND_URL
+          value: "http://backend-service:5000"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -29,5 +40,6 @@ spec:
   selector:
     app: frontend
   ports:
-    - port: 80
-      targetPort: 5000
+  - port: 80
+    targetPort: 5000
+    protocol: TCP
