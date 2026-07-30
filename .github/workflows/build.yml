@@ -12,18 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: azure/login@v2
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Login to ACR
+        run: |
+          echo "${{ secrets.ACR_PASSWORD }}" | docker login acrmicroapp.azurecr.io \
+            -u "${{ secrets.ACR_USERNAME }}" \
+            --password-stdin
 
-      - run: az acr login --name acrmicroapp
-
-      - name: Build frontend
+      - name: Build and Push Frontend
         run: |
           docker build -t acrmicroapp.azurecr.io/frontend:${{ github.sha }} ./frontend
           docker push acrmicroapp.azurecr.io/frontend:${{ github.sha }}
 
-      - name: Build backend
+      - name: Build and Push Backend
         run: |
           docker build -t acrmicroapp.azurecr.io/backend:${{ github.sha }} ./backend
           docker push acrmicroapp.azurecr.io/backend:${{ github.sha }}
