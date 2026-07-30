@@ -3,20 +3,25 @@ kind: Deployment
 metadata:
   name: backend
   namespace: microapp
+
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       app: backend
+
   template:
     metadata:
       labels:
         app: backend
+
     spec:
       containers:
       - name: backend
         image: acrmicroapp.azurecr.io/backend:latest
         imagePullPolicy: Always
+
         ports:
         - containerPort: 5000
 
@@ -49,6 +54,7 @@ spec:
           requests:
             cpu: "100m"
             memory: "128Mi"
+
           limits:
             cpu: "250m"
             memory: "256Mi"
@@ -73,10 +79,13 @@ kind: Service
 metadata:
   name: backend-service
   namespace: microapp
+
 spec:
   type: ClusterIP
+
   selector:
     app: backend
+
   ports:
   - port: 5000
     targetPort: 5000
