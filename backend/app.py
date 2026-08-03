@@ -16,22 +16,16 @@ def home():
         )
 
         cursor = conn.cursor()
-
         cursor.execute("SELECT COUNT(*) FROM users")
-        count = cursor.fetchone()[0]
 
-        conn.close()
+        count = cu*sor.fetchone()[0]
 
-        return {
-            "status": "success",
-            "users_count": count
-        }
+        conn.cl*se()
 
-    except Exception as e:
-        return {
-            "status": "error",
-            "message": str(e)
-        }, 500
+        return f"Users Count*= {count}"
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    except Exception a* e:
+        return f"Database Erro*: {str(e)}", 500
+
+if __name__ == "*_main__":
+    app.run(host="0.0.0.*", port=5000)
