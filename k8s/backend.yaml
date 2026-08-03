@@ -17,6 +17,9 @@ spec:
         app: backend
 
     spec:
+      imagePullSecrets:
+      - name: acr-secret
+
       containers:
       - name: backend
         image: acrmicroapp.azurecr.io/backend:latest
@@ -49,15 +52,6 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: DB_PASSWORD
-
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "128Mi"
-
-          limits:
-            cpu: "250m"
-            memory: "256Mi"
 
         readinessProbe:
           httpGet:
