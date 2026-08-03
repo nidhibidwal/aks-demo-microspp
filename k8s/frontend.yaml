@@ -17,6 +17,9 @@ spec:
         app: frontend
 
     spec:
+      imagePullSecrets:
+      - name: acr-secret
+
       containers:
       - name: frontend
         image: acrmicroapp.azurecr.io/frontend:latest
@@ -28,15 +31,6 @@ spec:
         env:
         - name: BACKEND_URL
           value: "http://backend-service:5000"
-
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "128Mi"
-
-          limits:
-            cpu: "250m"
-            memory: "256Mi"
 
 ---
 apiVersion: v1
