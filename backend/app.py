@@ -24,7 +24,7 @@ def home():
 
         return f"Users Count*= {count}"
 
-    except Exception a* e:
+    except Exception a e:
         return f"Database Erro*: {str(e)}", 500
 
 if __name__ == "*_main__":
