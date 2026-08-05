@@ -23,7 +23,7 @@ spec:
       containers:
       - name: backend
         image: acrmicroapp.azurecr.io/backend:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
 
         ports:
         - containerPort: 5000
@@ -55,17 +55,19 @@ spec:
 
         readinessProbe:
           httpGet:
-            path: /
+            path: /ready
             port: 5000
           initialDelaySeconds: 10
           periodSeconds: 10
+          failureThreshold: 3
 
         livenessProbe:
           httpGet:
-            path: /
+            path: /health
             port: 5000
-          initialDelaySeconds: 20
+          initialDelaySeconds: 30
           periodSeconds: 20
+          failureThreshold: 3
 
 ---
 apiVersion: v1
