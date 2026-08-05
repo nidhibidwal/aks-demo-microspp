@@ -1,11 +1,10 @@
-CREATE DATABASE microdb;
+CREATE DATABASE IF NOT EXISTS microdb;
+USE microdb;
 
-U*E microdb;
-
-CREATE TABLE users (
- *  id INT AUTO_INCREMENT PRIMARY KE*,
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100)
 );
 
-INSERT*INTO users(name)
-VALUES ('Nidhi');*
+INSERT INTO users (name)
+VALUES ('Nidhi');
